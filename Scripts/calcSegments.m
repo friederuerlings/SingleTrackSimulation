@@ -18,7 +18,7 @@ flippedVel = flip(apexData.velocity(:,1));
 load_system ('segmentCalcNeg');
 set_param('segmentCalcNeg','FastRestart','off')
 % set_param('segmentCalcNeg','StartTime','0','StopTime','inf','FixedStep','1e-3');
-set_param('segmentCalcNeg','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
+set_param('segmentCalcNeg','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-2');
 set_param('segmentCalcNeg','FastRestart','on');
 
 for n = 1:1:length(flippedLocs)-1
@@ -52,7 +52,7 @@ apexData.velocity(:,2) = flip(flippedVel);
 load_system ('segmentCalcPos');
 set_param('segmentCalcPos','FastRestart','off');
 % set_param('segmentCalcPos','StartTime','0','StopTime','inf','FixedStep','1e-3');
-set_param('segmentCalcPos','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
+set_param('segmentCalcPos','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-2');
 set_param('segmentCalcPos','FastRestart','on');
 
 for n = 1:1:length(apexData.locs)-1
@@ -89,25 +89,25 @@ clear flippedCourse flippedLocs flippedVel
 
 %% Plot Segments
 
-for n = 1:1:1
-    figure(n)
-    plot(segmentData{n,2}.distance, segmentData{n,2}.velocity)
-    hold on
-    grid
-%             plot(segmentData{n,2}.distance, segmentData{n,2}.a_x)
-    plot(segmentData{n,1}.distance, segmentData{n,1}.velocity)
-%             plot(segmentData{n,1}.distance, segmentData{n,1}.a_x
-    hold off
-end
+% for n = 1:1:1
+%     figure(n)
+%     plot(segmentData{n,2}.distance, segmentData{n,2}.velocity)
+%     hold on
+%     grid
+% %             plot(segmentData{n,2}.distance, segmentData{n,2}.a_x)
+%     plot(segmentData{n,1}.distance, segmentData{n,1}.velocity)
+% %             plot(segmentData{n,1}.distance, segmentData{n,1}.a_x
+%     hold off
+% end
 
 %% Plot Segment Radius
 
-for n = 1:1:1
-    
-    figure(100 + n)
-    plot(1:1:length(segments{n}), segments{n})
-    grid
-end
+% for n = 1:1:1
+%     
+%     figure(100 + n)
+%     plot(1:1:length(segments{n}), segments{n})
+%     grid
+% end
 
 %% Plot Lap
 
