@@ -9,8 +9,8 @@ init.inertia_z    = 360;
 
 %Aerodynamics
 init.ae_A         = 1.2;  % in m²
-init.c_L          = 2.85;
-init.c_D          = 1.3;
+init.c_L          = 3.16;
+init.c_D          = 1.5;
 init.aeroBalance  = 50;   % in % von Vorne
 
 %Suspension
@@ -18,7 +18,7 @@ init.my           = 1.3;
 
 %Powertrain
 init.P_engine     = 45; % in kW
-init.AllWD        = 0;
+init.AllWD        = 1;
 
 %Physikalische Größen
 init.g = 9.81;
