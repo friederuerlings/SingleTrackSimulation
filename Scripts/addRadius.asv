@@ -9,8 +9,8 @@ course = input;
 
 for n = 2:1:length(input)-1
     rad = calcRadius(input(n-1,:),input(n,:),input(n+1,:));
-%     if rad > 300 || isnan(rad) == 1
-%         rad = 300;
+%     if rad > 200 || isnan(rad) == 1
+%         rad = 200;
 %     end
     course(n,3) = rad;        
 end
@@ -21,10 +21,9 @@ end
 
 %% Radius Interpolieren
 %RadiusLookUp(:,1) = Radius
-%RadiusLookUp(:,2) = Distance
-
-radiusLookUp(:,2) = [0:0.01:evalin('base','TrackLength')]';
+%RadiusLookUp(:,2) = 
+radiusLookUp(:,2) = [0:0.01:TrackLength]';
 radius = course(:,3);
-radiusLookUp(:,1) = interp1(evalin('base','distance'), radius, radiusLookUp(:,2), 'makima');
+radiusLookUp(:,1) = interp1(distance, radius, distance_interp, 'makima');
 
 

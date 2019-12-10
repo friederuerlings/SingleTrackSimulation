@@ -6,6 +6,8 @@ ggV.LookUp_pos = [];
 ggV.LookUp_neg = []; 
 vRLookUp = [];
 
+
+
 %Maximale Geschwindigkeit berechnen
 load_system ('maxVelocity')
 maxVsimu = sim('maxVelocity');
@@ -48,12 +50,10 @@ vRLookUp = [vRLookUp, [0:init.deltaV:init.maxV]'];
 
 %Fügt dem Kurs den Radius zu jedem Punkt hinzu
 %Alles über minimalem Radius bei vmax wird zu minimalem Radius bei vmax
-%radiusLookUp wird für Simulink Look Up Table benötigt
-[course, radiusLookUp] = addRadius(course);
+course = addRadius(course);
 
 %apexData enthält die Position und maximale Geschwindigkeit an allen Apex
 [apexData, segments] = maxVelocityatApex(course, vRLookUp);
-% apexData.velocity = apexData.velocity.*0.5;
 
 %% Plottet das ggV-Diagramm
 % figure()

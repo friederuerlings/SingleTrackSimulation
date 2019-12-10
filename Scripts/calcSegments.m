@@ -18,8 +18,10 @@ flippedVel = flip(apexData.velocity(:,1));
 load_system ('segmentCalcNeg');
 set_param('segmentCalcNeg','FastRestart','off')
 % set_param('segmentCalcNeg','StartTime','0','StopTime','inf','FixedStep','1e-3');
-set_param('segmentCalcNeg','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-2');
+set_param('segmentCalcNeg','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
 set_param('segmentCalcNeg','FastRestart','on');
+set_param('segmentCalcNeg','AlgebraicLoopSolver','LineSearch');
+% set_param('segmentCalcNeg','AlgebraicLoopSolver','TrustRegion');
 
 for n = 1:1:length(flippedLocs)-1
     
@@ -52,8 +54,10 @@ apexData.velocity(:,2) = flip(flippedVel);
 load_system ('segmentCalcPos');
 set_param('segmentCalcPos','FastRestart','off');
 % set_param('segmentCalcPos','StartTime','0','StopTime','inf','FixedStep','1e-3');
-set_param('segmentCalcPos','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-2');
+set_param('segmentCalcPos','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
 set_param('segmentCalcPos','FastRestart','on');
+set_param('segmentCalcPos','AlgebraicLoopSolver','LineSearch');
+% set_param('segmentCalcPos','AlgebraicLoopSolver','TrustRegion');
 
 for n = 1:1:length(apexData.locs)-1
     
@@ -89,7 +93,7 @@ clear flippedCourse flippedLocs flippedVel
 
 %% Plot Segments
 
-% for n = 1:1:1
+% for n = 16:1:18
 %     figure(n)
 %     plot(segmentData{n,2}.distance, segmentData{n,2}.velocity)
 %     hold on
@@ -102,12 +106,20 @@ clear flippedCourse flippedLocs flippedVel
 
 %% Plot Segment Radius
 
-% for n = 1:1:1
+% for n = 16:1:18
 %     
 %     figure(100 + n)
 %     plot(1:1:length(segments{n}), segments{n})
 %     grid
+%     
+%     figure()
+%     plot(segmentData{n,2}.distance, segmentData{n,2}.radius)
+%     grid
+%     hold on
+%     plot(segmentData{n,1}.distance, segmentData{n,1}.radius)
 % end
+
+
 
 %% Plot Lap
 
@@ -127,21 +139,21 @@ xlabel('Distance [m]')
 ylabel('Velocity [m/s]')
 
 % Plot Velocity über Kurs
-figure('Name', 'Velocity - Course')
-interpVel = interp1(resultData.distance, resultData.velocity, distance);
-x = course(:,1)';
-y = course(:,2)';
-z = interpVel'.*3.6;
-C = interpVel'.*3.6;
-
-surface([x;x],[y;y],[z;z],[C;C],...
-    'FaceColor','none',...
-    'EdgeColor','interp', 'LineWidth', 3);
-title('Velocity - Course')
-colorbar
-set(gca,'XTickLabel',[],'YTickLabel',[]);
-
-clear x y z C n interpVel
+% figure('Name', 'Velocity - Course')
+% interpVel = interp1(resultData.distance, resultData.velocity, distance);
+% x = course(:,1)';
+% y = course(:,2)';
+% z = interpVel'.*3.6;
+% C = interpVel'.*3.6;
+% 
+% surface([x;x],[y;y],[z;z],[C;C],...
+%     'FaceColor','none',...
+%     'EdgeColor','interp', 'LineWidth', 3);
+% title('Velocity - Course')
+% colorbar
+% set(gca,'XTickLabel',[],'YTickLabel',[]);
+% 
+% clear x y z C n interpVel
 
 %% temp section
 
