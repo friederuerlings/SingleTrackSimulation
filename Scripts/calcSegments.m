@@ -12,16 +12,19 @@ flippedLocs = (length(course(:,3)) + 1) - flip(apexData.locs(:,1));
 flippedCourse = flip(course);
 flippedVel = flip(apexData.velocity(:,1));
 
+%Simulink initialisieren
+load_system ('segmentCalcPos');
+set_param('segmentCalcPos','FastRestart','off');
+% set_param('segmentCalcPos','StartTime','0','StopTime','inf','FixedStep','1e-3');
+set_param('segmentCalcPos','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
+set_param('segmentCalcPos','FastRestart','on');
+set_param('segmentCalcPos','AlgebraicLoopSolver','LineSearch');
+% set_param('segmentCalcPos','AlgebraicLoopSolver','TrustRegion');
+
 
 %% max Apex Velocity über Braking 
 
-load_system ('segmentCalcNeg');
-set_param('segmentCalcNeg','FastRestart','off')
-% set_param('segmentCalcNeg','StartTime','0','StopTime','inf','FixedStep','1e-3');
-set_param('segmentCalcNeg','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
-set_param('segmentCalcNeg','FastRestart','on');
-set_param('segmentCalcNeg','AlgebraicLoopSolver','LineSearch');
-% set_param('segmentCalcNeg','AlgebraicLoopSolver','TrustRegion');
+init.state = 1; % Braking
 
 for n = 1:1:length(flippedLocs)-1
     
@@ -29,7 +32,7 @@ for n = 1:1:length(flippedLocs)-1
     apexVelocity = flippedVel(n);
     stoppingDistance = (flippedLocs(n+1) - 1) * init.ptDistance;
        
-    segmentData{length(apexData.locs)-n,1} = sim('segmentCalcNeg');
+    segmentData{length(apexData.locs)-n,1} = sim('segmentCalcPos');
     
     % Velocity überschreiben
     if max(segmentData{length(apexData.locs)-n,1}.velocity) < flippedVel(n+1)
@@ -51,13 +54,7 @@ apexData.velocity(:,2) = flip(flippedVel);
 
 %% max Apex Velocity über Acceleration
 
-load_system ('segmentCalcPos');
-set_param('segmentCalcPos','FastRestart','off');
-% set_param('segmentCalcPos','StartTime','0','StopTime','inf','FixedStep','1e-3');
-set_param('segmentCalcPos','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
-set_param('segmentCalcPos','FastRestart','on');
-set_param('segmentCalcPos','AlgebraicLoopSolver','LineSearch');
-% set_param('segmentCalcPos','AlgebraicLoopSolver','TrustRegion');
+init.state = 0; % Acceleration
 
 for n = 1:1:length(apexData.locs)-1
     
@@ -106,7 +103,7 @@ clear flippedCourse flippedLocs flippedVel
 
 %% Plot Segment Radius
 
-% for n = 16:1:18
+% for n = 2:1:2
 %     
 %     figure(100 + n)
 %     plot(1:1:length(segments{n}), segments{n})

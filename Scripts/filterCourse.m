@@ -1,8 +1,8 @@
-function [filteredapexData] = filterCourse(apexData)
+function [filteredapexData] = filterCourse(apexData, maxRadius)
 
 % entfernt alle Apex deren Geschwindigkeit größer als init.vmax ist
 
-logicMat = apexData.radius(:,1) < ceil(max(evalin('base','vRLookUp(:,1)')));
+logicMat = apexData.radius(:,1) < maxRadius;
 logicMat = horzcat(logicMat,logicMat,logicMat);
 
 filteredapexData.radius = apexData.radius(logicMat(:,1));

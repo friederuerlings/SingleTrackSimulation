@@ -1,4 +1,6 @@
-function [apexData, segments] = maxVelocityatApex(course, vRLookUp)
+function [apexData, segments] = maxVelocityatApex(course)
+
+%% Erstellt Apex Struct mit Locs und Radius
 % Berechnung der Peaks (Apex)
 [apexData.radius, apexData.locs] = findpeaks(course(:,3)*-1);
 apexData.radius = apexData.radius * -1;
@@ -7,19 +9,23 @@ apexData.radius = apexData.radius * -1;
 apexData.locs = vertcat(1, apexData.locs, length(course));
 apexData.radius = vertcat(course(1,3), apexData.radius, course(end,3));
 
-apexData.velocity = interp1(vRLookUp(:,1),vRLookUp(:,2),apexData.radius);
-apexData.velocity(isnan(apexData.velocity)) = evalin('base', 'init.maxV');
+%% Velocity am Apex berechnen
+load_system ('velocityInRadiusOut');
+set_param('velocityInRadiusOut','StartTime','0','StopTime','init.maxV','MinStep','auto','MaxStep','auto');
+tempSim = sim('velocityInRadiusOut');
+
+for n = 1:1:length(apexData.locs)
+    apexData.velocity(n,1) = interp1(tempSim.radius, tempSim.velocity, apexData.radius(n));
+    apexData.xy(n,:) = course(apexData.locs(n),:);
+end
 
 % Startgeschwindigkeit
 % apexData.velocity(1) = 0;
 
-for n = 1:length(apexData.locs)
-    apexData.xy(n,:) = course(apexData.locs(n),:);
-end
-
 % filtert apexData, entfernt alle apex mit v > vmax
-[apexData] = filterCourse(apexData);
+[apexData] = filterCourse(apexData, tempSim.radius(end));
 
+%% Erstellt Segments Cell
 % Segements enthält die Radien der Segmente
 for n = 1:(size(apexData.locs)-1)
     

@@ -1,10 +1,10 @@
-clear apexData ggV interpVel resultData segmentData segments vRLookUp
+clear apexData ggV interpVel resultData segmentData segments
 
 %Gesamtfahrzeug
 init.m            = 250;  % in kg
-init.cog_z        = 222;  % in mm
-init.cog_x        = 51;   % in % von Vorne
-init.wheelbase    = 1550; % in m
+init.cog_z        = 0.222;  % in m
+init.cog_x        = 50;   % in % von Vorne
+init.wheelbase    = 1.550; % in m
 init.inertia_z    = 360;
 
 %Aerodynamics
@@ -18,7 +18,7 @@ init.my           = 1.3;
 
 %Powertrain
 init.P_engine     = 45; % in kW
-init.AllWD        = 1;
+init.AllWD        = 0;
 
 %Physikalische Größen
 init.g = 9.81;

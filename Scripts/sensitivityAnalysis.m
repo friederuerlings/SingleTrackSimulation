@@ -2,8 +2,8 @@
 
 LapTime = [];
 
-for o = 10:10:90
-    init.aeroBalance = o;
+for o = 0.5:0.5:1.5
+    init.cog_z = o;
     
     Initialisierung
     
@@ -14,7 +14,7 @@ end
 %% Plotten
 
 figure()
-plot([10:10:90], LapTime, 'LineWidth', 2)
+plot([0.5:0.5:1.5], LapTime, 'LineWidth', 2)
 grid
 title('Aero Balance - LapTime')
 xlabel('Balance [% von Vorne]')
