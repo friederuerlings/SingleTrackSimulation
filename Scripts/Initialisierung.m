@@ -12,7 +12,7 @@ init.ae_A         = 1;  % in m²
 init.c_L          = 3.16;
 init.c_D          = 1.5;
 init.aeroBalance  = 50;   % in % von Vorne
-init.ae_z         = 0.3;
+% init.ae_z         = 0.1; % in m
 
 %Suspension
 init.my           = 1.3;
@@ -36,6 +36,7 @@ init.l_cog_front = (init.cog_x/100) * init.wheelbase;
 init.l_cog_rear  = init.wheelbase - init.l_cog_front;
 init.l_ae_front = (init.aeroBalance/100) * init.wheelbase;
 init.l_ae_rear = init.wheelbase - init.l_ae_front;
+init.hebel_drag = init.ae_z - init.cog_z;
 
 
 %% Lap Time Simulation durchführen
@@ -43,7 +44,7 @@ init.l_ae_rear = init.wheelbase - init.l_ae_front;
 calcggV
 Acceleration
 calcSegments
-evaluation
+% evaluation
 
 
 

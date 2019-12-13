@@ -1,7 +1,29 @@
-%% Einfluss von Masse auf Lap Time
-
 LapTime = [];
 LapTimeRow = [];
+
+%% Ein Parameter
+
+for n = 0.2:0.025:0.35
+    init.ae_z = n;
+    
+    Initialisierung
+    
+    LapTime = [LapTime; resultData.tout];
+    
+end
+
+%% Plotten
+
+figure()
+plot(0.2:0.025:0.35, LapTime)
+grid
+xlabel('Drag Height [m]')
+ylabel('LapTime [s]')
+title('CoG Height 0.267m')
+
+
+
+%% Zwei Parameter
 
 for n = 3:0.2:4.6
     
