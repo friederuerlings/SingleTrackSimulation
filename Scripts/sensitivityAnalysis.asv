@@ -32,8 +32,8 @@ end
 % ylabel('LapTime [sec]')
 
 figure()
-surf([1:0.2:2],[3:0.2:4.6], LapTime, 'FaceColor','interp')
-title('Aero Coefficients on LapTime')
+surf([1:0.2:2],[3:0.2:4.6], LapTime, 'EdgeColor', 'interp', 'FaceColor','interp')
+title('Name', 'Aero Coefficients on LapTime')
 xlabel('c_D')
 ylabel('c_L')
 zlabel('LapTime')

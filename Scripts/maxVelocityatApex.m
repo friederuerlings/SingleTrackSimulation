@@ -15,7 +15,7 @@ set_param('velocityInRadiusOut','StartTime','0','StopTime','init.maxV','MinStep'
 tempSim = sim('velocityInRadiusOut');
 
 for n = 1:1:length(apexData.locs)
-    apexData.velocity(n,1) = interp1(tempSim.radius, tempSim.velocity, apexData.radius(n));
+    apexData.velocity(n,1) = interp1(tempSim.radius, tempSim.velocity, apexData.radius(n),'linear', 'extrap');
     apexData.xy(n,:) = course(apexData.locs(n),:);
 end
 

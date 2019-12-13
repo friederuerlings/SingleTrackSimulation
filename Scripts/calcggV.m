@@ -46,7 +46,6 @@ clear ggV_v
 
 %apexData enthält die Position und maximale Geschwindigkeit an allen Apex
 [apexData, segments] = maxVelocityatApex(course);
-% apexData.velocity = apexData.velocity.*0.5;
 
 %% Plottet das ggV-Diagramm
 % figure()

@@ -1,4 +1,4 @@
-n = 2;
+n = 5;
 
 %% Acceleration
 
@@ -20,3 +20,9 @@ flippedVel = flip(apexData.velocity(:,1));
 currentDistance = (flippedLocs(n) - 1) * init.ptDistance;
 apexVelocity = flippedVel(n);
 stoppingDistance = (flippedLocs(n+1) - 1) * init.ptDistance;
+
+%% 
+
+interp_dist
+
+interp_rad = interp1(distance, course(:,3), 
