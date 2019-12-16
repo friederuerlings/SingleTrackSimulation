@@ -2,7 +2,7 @@ clear segmentData
 warning off MATLAB:polyfit:RepeatedPointsOrRescale
 warning off 'Simulink:blocks:SquareRootOfNegative'
 resultData.velocity = []; resultData.distance = []; resultData.tout = 0; ...
-    resultData.a_x = []; resultData.a_y = []; resultData.radius = [];
+    resultData.a_x = []; resultData.a_y = []; resultData.radius = []; resultData.energy = 0;
 
 %Apex Velocity Backup 
 apexData.velocity(:,2) = apexData.velocity(:,1);
@@ -46,6 +46,7 @@ for n = 1:1:length(flippedLocs)-1
     segmentData{length(apexData.locs)-n,1}.a_y = flip(segmentData{length(apexData.locs)-n,1}.a_y);
     segmentData{length(apexData.locs)-n,1}.radius = flip(segmentData{length(apexData.locs)-n,1}.radius);
     segmentData{length(apexData.locs)-n,1}.tout = flip(segmentData{length(apexData.locs)-n,1}.tout);
+    segmentData{length(apexData.locs)-n,1}.energy = flip(segmentData{length(apexData.locs)-n,1}.energy);
     
 end
 

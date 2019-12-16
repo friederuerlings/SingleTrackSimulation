@@ -9,6 +9,7 @@ logicDiff = deltad ~= 0;
 logicDiff = logical(logicDiff);
 
 segmentData.tout = segmentData.tout(logicDiff);
+segmentData.energy = segmentData.energy(logicDiff);
 segmentData.velocity = segmentData.velocity(logicDiff);
 segmentData.distance = segmentData.distance(logicDiff);
 segmentData.a_x = segmentData.a_x(logicDiff);

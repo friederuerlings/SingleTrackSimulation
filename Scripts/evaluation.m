@@ -9,6 +9,8 @@ disp(resultData.tout)
 % disp(accelData.tout(end))
 % disp('Max Velocity')
 % disp(max(accelData.velocity(end))*3.6)
+disp('Energy Consumption')
+disp(resultData.energy(end).*22)
 disp('___________________')
 
 % Plot Velocity über Distance
@@ -38,7 +40,7 @@ disp('___________________')
 
 %% Plot Segments
 
-% for n = 10:1:10
+% for n = 19:1:19
 %     figure(n)
 %     plot(segmentData{n,2}.distance, segmentData{n,2}.velocity)
 %     hold on

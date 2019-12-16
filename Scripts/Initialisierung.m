@@ -12,7 +12,7 @@ init.ae_A         = 1;  % in m²
 init.c_L          = 3.16;
 init.c_D          = 1.5;
 init.aeroBalance  = 50;   % in % von Vorne
-% init.ae_z         = 0.1; % in m
+init.ae_z         = 0.1; % in m
 
 %Suspension
 init.my           = 1.3;
@@ -20,6 +20,7 @@ init.my           = 1.3;
 %Powertrain
 init.P_engine     = 45; % in kW
 init.AllWD        = 1;
+init.Brennwert_fuel    = 21.4; %in MJ/L
 
 %Physikalische Größen
 init.g = 9.81;
@@ -44,7 +45,7 @@ init.hebel_drag = init.ae_z - init.cog_z;
 calcggV
 Acceleration
 calcSegments
-% evaluation
+evaluation
 
 
 
