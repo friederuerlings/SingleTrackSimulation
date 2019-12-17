@@ -3,8 +3,8 @@ LapTimeRow = [];
 
 %% Ein Parameter
 
-for n = 0.2:0.025:0.35
-    init.ae_z = n;
+for n = 40:5:60
+    init.drs_radius = n;
     
     Initialisierung
     
@@ -15,11 +15,11 @@ end
 %% Plotten
 
 figure()
-plot(0.2:0.025:0.35, LapTime)
+plot(25:5:45, LapTime)
 grid
-xlabel('Drag Height [m]')
-ylabel('LapTime [s]')
-title('CoG Height 0.267m')
+% xlabel('Drag Height [m]')
+% ylabel('LapTime [s]')
+% title('CoG Height 0.267m')
 
 
 

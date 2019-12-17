@@ -2,7 +2,8 @@ clear segmentData
 warning off MATLAB:polyfit:RepeatedPointsOrRescale
 warning off 'Simulink:blocks:SquareRootOfNegative'
 resultData.velocity = []; resultData.distance = []; resultData.tout = 0; ...
-    resultData.a_x = []; resultData.a_y = []; resultData.radius = []; resultData.energy = 0;
+    resultData.a_x = []; resultData.a_y = []; resultData.radius = []; resultData.fuel = 0; ...
+    resultData.drs_open = [];
 
 %Apex Velocity Backup 
 apexData.velocity(:,2) = apexData.velocity(:,1);
@@ -13,13 +14,13 @@ flippedCourse = flip(course);
 flippedVel = flip(apexData.velocity(:,1));
 
 %Simulink initialisieren
-load_system ('segmentCalcPos');
-set_param('segmentCalcPos','FastRestart','off');
-set_param('segmentCalcPos','StartTime','0','StopTime','inf','FixedStep','1e-3');
-% set_param('segmentCalcPos','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
-set_param('segmentCalcPos','FastRestart','on');
-set_param('segmentCalcPos','AlgebraicLoopSolver','LineSearch');
-% set_param('segmentCalcPos','AlgebraicLoopSolver','TrustRegion');
+load_system ('segmentCalc');
+set_param('segmentCalc','FastRestart','off');
+set_param('segmentCalc','StartTime','0','StopTime','inf','FixedStep','1e-3');
+% set_param('segmentCalc','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
+set_param('segmentCalc','FastRestart','on');
+set_param('segmentCalc','AlgebraicLoopSolver','LineSearch');
+% set_param('segmentCalc','AlgebraicLoopSolver','TrustRegion');
 
 
 %% max Apex Velocity über Braking 
@@ -32,7 +33,7 @@ for n = 1:1:length(flippedLocs)-1
     apexVelocity = flippedVel(n);
     stoppingDistance = (flippedLocs(n+1) - 1) * init.ptDistance;
        
-    segmentData{length(apexData.locs)-n,1} = sim('segmentCalcPos');
+    segmentData{length(apexData.locs)-n,1} = sim('segmentCalc');
     
     % Velocity überschreiben
     if max(segmentData{length(apexData.locs)-n,1}.velocity) < flippedVel(n+1)
@@ -46,7 +47,8 @@ for n = 1:1:length(flippedLocs)-1
     segmentData{length(apexData.locs)-n,1}.a_y = flip(segmentData{length(apexData.locs)-n,1}.a_y);
     segmentData{length(apexData.locs)-n,1}.radius = flip(segmentData{length(apexData.locs)-n,1}.radius);
     segmentData{length(apexData.locs)-n,1}.tout = flip(segmentData{length(apexData.locs)-n,1}.tout);
-    segmentData{length(apexData.locs)-n,1}.energy = flip(segmentData{length(apexData.locs)-n,1}.energy);
+    segmentData{length(apexData.locs)-n,1}.fuel = flip(segmentData{length(apexData.locs)-n,1}.fuel);
+    segmentData{length(apexData.locs)-n,1}.drs_open = flip(segmentData{length(apexData.locs)-n,1}.drs_open);
     
 end
 
@@ -63,7 +65,7 @@ for n = 1:1:length(apexData.locs)-1
     apexVelocity = apexData.velocity(n,2);
     stoppingDistance = (apexData.locs(n+1,1) - 1) * init.ptDistance;
     
-    segmentData{n,2} = sim('segmentCalcPos');
+    segmentData{n,2} = sim('segmentCalc');
     
     %löscht doppelte Werte
     segmentData{n,2} = clearDouble(segmentData{n,2});
@@ -88,6 +90,11 @@ end
 
 clear currentDistance apexVelocity stoppingDistance n 
 clear flippedCourse flippedLocs flippedVel
+
+%% Skid Pad berechnen
+
+resultData.SP_tout = 57.3341 / apexData.sp_velocity;
+
 
 %% temp section
 

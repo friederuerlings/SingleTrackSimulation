@@ -1,4 +1,4 @@
-n = 10;
+n = 3;
 
 %% Acceleration
 

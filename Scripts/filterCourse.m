@@ -18,3 +18,4 @@ y_werte = y_werte(logicMat(:,1));
 r_werte = r_werte(logicMat(:,1));
 
 filteredapexData.xy = [x_werte y_werte r_werte];
+filteredapexData.sp_velocity = apexData.sp_velocity;

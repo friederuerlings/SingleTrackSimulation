@@ -19,6 +19,12 @@ for n = 1:1:length(apexData.locs)
     apexData.xy(n,:) = course(apexData.locs(n),:);
 end
 
+% Skid Pad velocity berechnen
+apexData.sp_velocity = interp1(tempSim.radius, tempSim.velocity, 9.125,'linear', 'extrap');
+
+
+
+
 % Startgeschwindigkeit
 % apexData.velocity(1) = 0;
 

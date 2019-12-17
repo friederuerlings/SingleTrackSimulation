@@ -2,24 +2,26 @@
 
 disp('___________________')
 disp('Lap Time')
-disp(resultData.tout)
+tempstring = [num2str(resultData.tout), ' sec'];
+disp(tempstring)
 % disp('Max Velocity')
 % disp(max(resultData.velocity)*3.6)
 % disp('Acceleration Time')
 % disp(accelData.tout(end))
 % disp('Max Velocity')
 % disp(max(accelData.velocity(end))*3.6)
-disp('Energy Consumption')
-disp(resultData.energy(end).*22)
+disp('Fuel Consumption')
+tempstring = [num2str(resultData.fuel*22), ' liter'];
+disp(tempstring)
 disp('___________________')
 
 % Plot Velocity über Distance
-    % figure('Name', 'Velocity - Distance')
-    % plot(resultData.distance, resultData.velocity)
-    % grid
-    % title('Velocity - Distance')
-    % xlabel('Distance [m]')
-    % ylabel('Velocity [m/s]')
+%     figure('Name', 'Velocity - Distance')
+%     plot(resultData.distance, resultData.velocity)
+%     grid
+%     title('Velocity - Distance')
+%     xlabel('Distance [m]')
+%     ylabel('Velocity [m/s]')
 
 % Plot Velocity über Kurs
 %     figure('Name', 'Velocity - Course')
@@ -38,9 +40,27 @@ disp('___________________')
 % 
 %     clear x y z C n interpVel
 
+%% Plot DRS über Kurs
+
+    figure('Name', 'DRS Open - Course')
+    interpDRS = interp1(resultData.distance, resultData.drs_open, distance);
+    x = course(:,1)';
+    y = course(:,2)';
+    z = interpDRS';
+    C = interpDRS';
+
+    surface([x;x],[y;y],[z;z],[C;C],...
+        'FaceColor','none',...
+        'EdgeColor','interp', 'LineWidth', 3);
+    title('DRS Open - Course')
+    colorbar
+    set(gca,'XTickLabel',[],'YTickLabel',[]);
+
+    clear x y z C n interpDRS
+
 %% Plot Segments
 
-% for n = 19:1:19
+% for n = 1:1:1
 %     figure(n)
 %     plot(segmentData{n,2}.distance, segmentData{n,2}.velocity)
 %     hold on
@@ -51,7 +71,7 @@ disp('___________________')
 
 %% Plot Segment Radius
 
-% for n = 10:1:10
+% for n = 1:1:1
 %     
 %     figure(100 + n)
 %     plot(1:1:length(segments{n}), segments{n})

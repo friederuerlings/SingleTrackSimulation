@@ -1,26 +1,29 @@
 clear apexData ggV interpVel resultData segmentData segments apexData
 
 %Gesamtfahrzeug
-init.m            = 165 + 70 + 35;  % in kg
+init.m            = 165 + 70;  % in kg
 init.cog_z        = 0.267;  % in m
-init.cog_x        = 50;   % in % von Vorne
+init.cog_x        = 51.7;   % in % von Vorne
 init.wheelbase    = 1.550; % in m
 init.inertia_z    = 60*0; %in kg*m²
 
 %Aerodynamics
-init.ae_A         = 1;  % in m²
-init.c_L          = 3.16;
-init.c_D          = 1.5;
-init.aeroBalance  = 50;   % in % von Vorne
-init.ae_z         = 0.1; % in m
+init.ae_A           = 1;  % in m²
+init.c_L            = 3.16;
+init.c_D            = 1.5;
+init.aeroBalance    = 50;   % in % von Vorne
+init.ae_z           = 0.267; % in m
+init.DRS_active     = 1;
+init.c_L_DRS        = 2.35;
+init.c_D_DRS        = 0.99;
 
 %Suspension
-init.my           = 1.3;
+init.my           = 1.5;
 
 %Powertrain
-init.P_engine     = 45; % in kW
-init.AllWD        = 1;
-init.Brennwert_fuel    = 21.4; %in MJ/L
+init.P_engine       = 45; % in kW
+init.AllWD          = 0;
+init.Heizwert_fuel  = 6.3; %in kWh/L
 
 %Physikalische Größen
 init.g = 9.81;
@@ -41,6 +44,8 @@ init.hebel_drag = init.ae_z - init.cog_z;
 
 
 %% Lap Time Simulation durchführen
+
+
 
 calcggV
 Acceleration

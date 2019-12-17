@@ -6,8 +6,9 @@ interpD = [currentDistance:evalin('base', 'init.deltaS'):stoppingDistance]';
 
 segmentData.velocity = interp1(segmentData.distance, segmentData.velocity, interpD, 'linear', 'extrap');
 segmentData.tout = interp1(segmentData.distance, segmentData.tout, interpD, 'linear', 'extrap');
-segmentData.energy = interp1(segmentData.distance, segmentData.energy, interpD, 'linear', 'extrap');
+segmentData.fuel = interp1(segmentData.distance, segmentData.fuel, interpD, 'linear', 'extrap');
 segmentData.a_x = interp1(segmentData.distance, segmentData.a_x, interpD, 'linear', 'extrap');
 segmentData.a_y = interp1(segmentData.distance, segmentData.a_y, interpD, 'linear', 'extrap');
 segmentData.radius = interp1(segmentData.distance, segmentData.radius, interpD, 'linear', 'extrap');
+segmentData.drs_open = interp1(segmentData.distance, segmentData.drs_open, interpD, 'linear', 'extrap');
 segmentData.distance = interpD;
