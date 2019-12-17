@@ -21,7 +21,7 @@ if segmentData_brake.velocity(1) <= segmentData_accel.velocity(1) ...
     resultData.radius = vertcat(resultData.radius, segmentData_brake.radius);
     resultData.tout = resultData.tout + max(segmentData_brake.tout);
     resultData.drs_open = vertcat(resultData.drs_open, segmentData_brake.drs_open);
-%     resultData.fuel = resultData.fuel + max(segmentData_brake.fuel);
+    resultData.fuel = resultData.fuel + max(segmentData_brake.fuel);
     
     resultData.velocity(end) = [];
     resultData.distance(end) = [];
@@ -73,7 +73,8 @@ resultData.velocity = vertcat(resultData.velocity, segmentData_accel.velocity(lo
 resultData.tout = resultData.tout + max(segmentData_accel.tout(logicAccel)) ...
     + max(segmentData_brake.tout(logicBrake));
 % Fuel
-resultData.fuel = resultData.fuel + max(segmentData_accel.fuel(logicAccel));
+resultData.fuel = resultData.fuel + max(segmentData_accel.fuel(logicAccel)) ...
+    + max(segmentData_brake.fuel(logicBrake));
 % A_x
 resultData.a_x = vertcat(resultData.a_x, segmentData_accel.a_x(logicAccel), ...
     segmentData_brake.a_x(logicBrake));
