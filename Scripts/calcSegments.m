@@ -1,9 +1,15 @@
 clear segmentData
-warning off MATLAB:polyfit:RepeatedPointsOrRescale
 warning off 'Simulink:blocks:SquareRootOfNegative'
-resultData.velocity = []; resultData.distance = []; resultData.tout = 0; ...
-    resultData.a_x = []; resultData.a_y = []; resultData.radius = []; resultData.fuel = 0; ...
-    resultData.drs_open = [];
+
+%Initialisiert die Größen, welche im Simulink Modell berechnet und
+%ausgegeben werden. Größen wie Zeit, Sprit etc. die aufaddiert werden
+%werden mit 0 initialisert, Vektoren wie distance etc. werden mit leerer
+%Menge [] initialisiert
+%Distance immer an erster Stelle lassen!
+resultVarsVektor = ["distance"; "velocity"; "a_x"; "a_y"; "radius"; "drs_open"; "F_x_Front"];
+resultVarsSum = ["tout"; "fuel"];
+resultData = initResultData(resultVarsVektor, resultVarsSum);
+clear resultVarsVektor resultVarsSum
 
 %Apex Velocity Backup 
 apexData.velocity(:,2) = apexData.velocity(:,1);
@@ -40,16 +46,15 @@ for n = 1:1:length(flippedLocs)-1
         flippedVel(n+1) = max(segmentData{length(apexData.locs)-n,1}.velocity);
     end
     
-    % Distance, Velocity und a_x umdrehen
-    segmentData{length(apexData.locs)-n,1}.distance = flip((TrackLength) - segmentData{length(apexData.locs)-n,1}.distance);
-    segmentData{length(apexData.locs)-n,1}.velocity = flip(segmentData{length(apexData.locs)-n,1}.velocity);
-    segmentData{length(apexData.locs)-n,1}.a_x = flip(segmentData{length(apexData.locs)-n,1}.a_x);
-    segmentData{length(apexData.locs)-n,1}.a_y = flip(segmentData{length(apexData.locs)-n,1}.a_y);
-    segmentData{length(apexData.locs)-n,1}.radius = flip(segmentData{length(apexData.locs)-n,1}.radius);
-    segmentData{length(apexData.locs)-n,1}.tout = flip(segmentData{length(apexData.locs)-n,1}.tout);
-    segmentData{length(apexData.locs)-n,1}.fuel = flip(segmentData{length(apexData.locs)-n,1}.fuel);
-    segmentData{length(apexData.locs)-n,1}.drs_open = flip(segmentData{length(apexData.locs)-n,1}.drs_open);
+    % Distance umdrehen
+    segmentData{length(apexData.locs)-n,1}.distance ...
+        = flip((TrackLength) - segmentData{length(apexData.locs)-n,1}.distance);
     
+    % Alle restlichen Größen umdrehen
+    for o = 2:length(resultData.Vars) % an erster Stelle steht distance
+       segmentData{length(apexData.locs)-n,1}.(resultData.Vars(o)) ...
+           = flip(segmentData{length(apexData.locs)-n,1}.(resultData.Vars(o))); 
+    end    
 end
 
 % Apex Velocity anpassen für den Fall, dass Bremspunkt vor Apex liegt
@@ -88,7 +93,7 @@ for n = 1:1:length(apexData.locs)-1
     end
 end
 
-clear currentDistance apexVelocity stoppingDistance n 
+clear currentDistance apexVelocity stoppingDistance n o
 clear flippedCourse flippedLocs flippedVel
 
 %% Skid Pad berechnen
