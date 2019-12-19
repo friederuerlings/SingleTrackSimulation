@@ -6,7 +6,7 @@ warning off 'Simulink:blocks:SquareRootOfNegative'
 %werden mit 0 initialisert, Vektoren wie distance etc. werden mit leerer
 %Menge [] initialisiert
 %Distance immer an erster Stelle lassen!
-resultVarsVektor = ["distance"; "velocity"; "a_x"; "a_y"; "radius"; "drs_open"; "F_x_Front"];
+resultVarsVektor = ["distance"; "velocity"; "a_x"; "a_y"; "radius"; "drs_open"; "F_x_Front"; "F_z_Front"];
 resultVarsSum = ["tout"; "fuel"];
 resultData = initResultData(resultVarsVektor, resultVarsSum);
 clear resultVarsVektor resultVarsSum
@@ -22,8 +22,8 @@ flippedVel = flip(apexData.velocity(:,1));
 %Simulink initialisieren
 load_system ('segmentCalc');
 set_param('segmentCalc','FastRestart','off');
-set_param('segmentCalc','StartTime','0','StopTime','inf','FixedStep','1e-3');
-% set_param('segmentCalc','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
+% set_param('segmentCalc','StartTime','0','StopTime','inf','FixedStep','1e-3');
+set_param('segmentCalc','StartTime','0','StopTime','inf','MinStep','auto','MaxStep','1e-3');
 set_param('segmentCalc','FastRestart','on');
 set_param('segmentCalc','AlgebraicLoopSolver','LineSearch');
 % set_param('segmentCalc','AlgebraicLoopSolver','TrustRegion');

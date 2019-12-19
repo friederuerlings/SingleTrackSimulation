@@ -13,7 +13,7 @@ init.c_L            = 3.16;
 init.c_D            = 1.5;
 init.aeroBalance    = 50;   % in % von Vorne
 init.ae_z           = 0.267; % in m
-init.DRS_active     = 1;
+init.DRS_active     = 0;
 init.c_L_DRS        = 2.35;
 init.c_D_DRS        = 0.99;
 
@@ -22,7 +22,7 @@ init.my           = 1.5;
 
 %Powertrain
 init.P_engine       = 45; % in kW
-init.AllWD          = 0;
+init.AllWD          = 1;
 init.Heizwert_fuel  = 6.3; %in kWh/L
 
 %Physikalische Größen
