@@ -1,5 +1,5 @@
-n = 29;
-% n = length(apexData.locs) - 64;
+n = 3;
+n = length(segments) - 64;
 
 flippedLocs = (length(course(:,3)) + 1) - flip(apexData.locs(:,1));
 flippedCourse = flip(course);

@@ -5,7 +5,7 @@ init.m            = 165 + 70;  % in kg
 init.cog_z        = 0.267;  % in m
 init.cog_x        = 51.7;   % in % von Vorne
 init.wheelbase    = 1.550; % in m
-init.inertia_z    = 60*0; %in kg*m²
+init.inertia_z    = 60; %in kg*m²
 
 %Aerodynamics
 init.ae_A           = 1;  % in m²
@@ -21,9 +21,10 @@ init.c_D_DRS        = 0.99;
 init.my           = 1.5;
 
 %Powertrain
-init.P_engine       = 45; % in kW
-init.AllWD          = 1;
-init.Heizwert_fuel  = 6.3; %in kWh/L
+init.P_engine          = 47; % in kW
+init.AllWD             = 0;
+init.Heizwert_fuel     = 6.3; %in kWh/L
+init.engine_efficiency = 0.3; %in %
 
 %Physikalische Größen
 init.g = 9.81;

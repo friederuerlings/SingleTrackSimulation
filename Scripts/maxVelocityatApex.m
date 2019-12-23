@@ -11,7 +11,7 @@ apexData.radius = vertcat(course(1,3), apexData.radius, course(end,3));
 
 %% Velocity am Apex berechnen
 load_system ('velocityInRadiusOut');
-set_param('velocityInRadiusOut','StartTime','0','StopTime','init.maxV','MinStep','auto','MaxStep','auto');
+set_param('velocityInRadiusOut','StartTime','0','StopTime','init.maxV','MinStep','auto','MaxStep','1e-3');
 tempSim = sim('velocityInRadiusOut');
 
 for n = 1:1:length(apexData.locs)
@@ -21,8 +21,6 @@ end
 
 % Skid Pad velocity berechnen
 apexData.sp_velocity = interp1(tempSim.radius, tempSim.velocity, 9.125,'linear', 'extrap');
-
-
 
 
 % Startgeschwindigkeit
