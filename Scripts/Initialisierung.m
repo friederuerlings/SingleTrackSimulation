@@ -21,10 +21,10 @@ init.c_D_DRS        = 0.99;
 init.my           = 1.5;
 
 %Powertrain
-init.P_engine          = 47; % in kW
+init.P_engine          = 43; % in kW
 init.AllWD             = 0;
 init.Heizwert_fuel     = 6.3; %in kWh/L
-init.engine_efficiency = 0.3; %in %
+init.engine_efficiency = 0.29; %in %
 
 %Physikalische Größen
 init.g = 9.81;
@@ -34,6 +34,7 @@ init.rhoAir = 1.2;
 init.deltaV       = 5;    % in m/s
 init.ptDistance   = 0.1;  % in Meter
 init.deltaS       = 0.01; % in Meter
+init.ggvAySteps   = 6;    % Anzahl der Unterteilungen von a_y
 
 %% weitere Größen berechnen
 
@@ -45,8 +46,6 @@ init.hebel_drag = init.ae_z - init.cog_z;
 
 
 %% Lap Time Simulation durchführen
-
-
 
 calcggV
 Acceleration

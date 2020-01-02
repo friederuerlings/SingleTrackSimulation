@@ -93,6 +93,7 @@ for n = 1:1:length(apexData.locs)-1
     end
 end
 
+set_param('segmentCalc','FastRestart','off');
 clear currentDistance apexVelocity stoppingDistance n o
 clear flippedCourse flippedLocs flippedVel
 

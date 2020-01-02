@@ -63,7 +63,7 @@ clear tempstring
 
 %% Plot Segments
 
-% for n = 1:1:20
+% for n = 51:1:51
 %     figure(n)
 %     plot(segmentData{n,2}.distance, segmentData{n,2}.velocity)
 %     hold on
@@ -74,7 +74,7 @@ clear tempstring
 
 %% Plot Segment Radius
 
-% for n = 7:1:7
+% for n = 51:1:51
 %     
 %     figure(100 + n)
 %     plot(1:1:length(segments{n}), segments{n})
@@ -85,4 +85,5 @@ clear tempstring
 %     grid
 %     hold on
 %     plot(segmentData{n,1}.distance, segmentData{n,1}.radius)
+%     ylim ([0 200])
 % end
