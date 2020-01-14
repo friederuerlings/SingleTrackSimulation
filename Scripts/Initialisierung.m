@@ -2,15 +2,15 @@ clear apexData ggV interpVel resultData segmentData segments apexData
 
 %Gesamtfahrzeug
 init.m            = 165 + 70;  % in kg
-init.cog_z        = 0.267;  % in m
-init.cog_x        = 51.7;   % in % von Vorne
-init.wheelbase    = 1.550; % in m
-init.inertia_z    = 60; %in kg*m²
+init.cog_z        = 0.267;     % in m
+% init.cog_x        = 51.7;      % in % von Vorne
+init.wheelbase    = 1.550;     % in m
+init.inertia_z    = 60;        %in kg*m²
 
 %Aerodynamics
 init.ae_A           = 1;  % in m²
 init.c_L            = 3.16;
-init.c_D            = 1.5;
+init.c_D            = 1.8;
 init.aeroBalance    = 50;   % in % von Vorne
 init.ae_z           = 0.267; % in m
 init.DRS_active     = 0;
@@ -34,7 +34,7 @@ init.rhoAir = 1.2;
 init.deltaV       = 5;    % in m/s
 init.ptDistance   = 0.1;  % in Meter
 init.deltaS       = 0.01; % in Meter
-init.ggvAySteps   = 6;    % Anzahl der Unterteilungen von a_y
+init.ggvAySteps   = 10;    % Anzahl der Unterteilungen von a_y
 
 %% weitere Größen berechnen
 

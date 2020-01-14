@@ -26,7 +26,7 @@ clear tempstring
 %     xlabel('Distance [m]')
 %     ylabel('Velocity [m/s]')
 
-% Plot Velocity über Kurs
+% % Plot Velocity über Kurs
 %     figure('Name', 'Velocity - Course')
 %     interpVel = interp1(resultData.distance, resultData.velocity, distance);
 %     x = course(:,1)';
@@ -63,7 +63,7 @@ clear tempstring
 
 %% Plot Segments
 
-% for n = 51:1:51
+% for n = 21:1:21
 %     figure(n)
 %     plot(segmentData{n,2}.distance, segmentData{n,2}.velocity)
 %     hold on
@@ -87,3 +87,124 @@ clear tempstring
 %     plot(segmentData{n,1}.distance, segmentData{n,1}.radius)
 %     ylim ([0 200])
 % end
+
+%% Plottet das ggv-Diagramm mit Punkten
+
+% figure('Name', 'ggV Diagramm')
+% plot3(ggv.Data_pos(:,1),ggv.Data_pos(:,2),ggv.Data_pos(:,3),'*')
+% hold on
+% plot3(ggv.Data_neg(:,1),ggv.Data_neg(:,2),ggv.Data_neg(:,3),'*')
+% hold off
+% grid
+% title('ggV-Diagram')
+% xlabel('a_x [m/s²]')
+% ylabel('a_y [m/s²]')
+% zlabel('velocity [km/h]')
+
+
+%% Plottet das ggv-Diagramm mit Flächen
+
+%Positiver Bereich
+
+figure('Name', 'ggV Diagramm')
+plot3([0 0 0],[0 0 0],[0 0 0])
+
+for o = 1:init.ggvAySteps:length(ggv.Data_pos)-init.ggvAySteps
+    
+    vertices = [];
+    faces = [];
+    cdata = [];
+    
+for n = 1:1:init.ggvAySteps-1
+    
+    p = n+o-1;
+    
+    pt1 = ggv.Data_pos(p,:);
+    pt2 = ggv.Data_pos(p+1,:);
+    pt3 = ggv.Data_pos(p+init.ggvAySteps,:);
+    pt4 = ggv.Data_pos(p+init.ggvAySteps+1,:);
+    
+    facesn = n*4;
+    facesVek = [facesn - 3, facesn - 2, facesn, facesn - 1];
+    
+    pt1_cdata = ggv.Data_pos(p,3);
+    pt2_cdata = ggv.Data_pos(p+1,3);
+    pt3_cdata = ggv.Data_pos(p+init.ggvAySteps,3);
+    pt4_cdata = ggv.Data_pos(p+init.ggvAySteps+1,3);
+    
+    vertices = [vertices; pt1; pt2; pt3; pt4];
+    faces = [faces; facesVek];
+    cdata = [cdata; pt1_cdata; pt2_cdata; pt3_cdata; pt4_cdata];
+    
+    patch('Faces', faces, 'Vertices', vertices,'FaceVertexCData',cdata, 'FaceColor','interp')
+    
+end
+end
+
+% Negativer Bereich
+
+for o = 1:init.ggvAySteps:length(ggv.Data_neg)-init.ggvAySteps
+    
+    vertices = [];
+    faces = [];
+    cdata = [];
+    
+for n = 1:1:init.ggvAySteps-1
+    
+    p = n+o-1;
+    
+    pt1 = ggv.Data_neg(p,:);
+    pt2 = ggv.Data_neg(p+1,:);
+    pt3 = ggv.Data_neg(p+init.ggvAySteps,:);
+    pt4 = ggv.Data_neg(p+init.ggvAySteps+1,:);
+    
+    facesn = n*4;
+    facesVek = [facesn - 3, facesn - 2, facesn, facesn - 1];
+    
+    pt1_cdata = ggv.Data_neg(p,3);
+    pt2_cdata = ggv.Data_neg(p+1,3);
+    pt3_cdata = ggv.Data_neg(p+init.ggvAySteps,3);
+    pt4_cdata = ggv.Data_neg(p+init.ggvAySteps+1,3);
+    
+    vertices = [vertices; pt1; pt2; pt3; pt4];
+    faces = [faces; facesVek];
+    cdata = [cdata; pt1_cdata; pt2_cdata; pt3_cdata; pt4_cdata];
+    
+    patch('Faces', faces, 'Vertices', vertices,'FaceVertexCData',cdata, 'FaceColor','interp')
+    
+end
+end
+
+for o = init.ggvAySteps:init.ggvAySteps:length(ggv.Data_neg)-init.ggvAySteps
+    
+    vertices = [];
+    faces = [];
+    cdata = [];
+    
+    pt1 = ggv.Data_pos(o,:);
+    pt2 = ggv.Data_neg(o,:);
+    pt3 = ggv.Data_pos(o+init.ggvAySteps,:);
+    pt4 = ggv.Data_neg(o+init.ggvAySteps,:);
+    
+    pt1_cdata = ggv.Data_pos(o,3);
+    pt2_cdata = ggv.Data_neg(o,3);
+    pt3_cdata = ggv.Data_pos(o+init.ggvAySteps,3);
+    pt4_cdata = ggv.Data_neg(o+init.ggvAySteps,3);
+    
+    vertices = [pt1; pt2; pt3; pt4];
+    faces = [1, 2, 4, 3];
+    cdata = [pt1_cdata; pt2_cdata; pt3_cdata; pt4_cdata];
+        
+    patch('Faces', faces, 'Vertices', vertices,'FaceVertexCData',cdata, 'FaceColor','interp')
+    
+end
+
+grid
+title('ggV-Diagram')
+xlabel('a_x [m/s²]')
+ylabel('a_y [m/s²]')
+zlabel('velocity [m/s]')
+
+clear n o p pt1 pt2 pt3 pt4 pt1_cdata pt2_cdata pt3_cdata pt4_cdata ...
+    faces facesn facesVek vertices
+    

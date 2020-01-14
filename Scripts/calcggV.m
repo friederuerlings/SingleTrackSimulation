@@ -54,34 +54,9 @@ clear ggv_v ggvsim
 %apexData enthält die Position und maximale Geschwindigkeit an allen Apex
 [apexData, segments] = maxVelocityatApex(course);
 
-%% Plottet das ggv-Diagramm
 
-figure('Name', 'ggV Diagramm')
-plot3(ggv.Data_pos(:,1),ggv.Data_pos(:,2),ggv.Data_pos(:,3),'*')
-hold on
-plot3(ggv.Data_neg(:,1),ggv.Data_neg(:,2),ggv.Data_neg(:,3),'*')
-hold off
-grid
-title('ggV-Diagram')
-xlabel('a_x [m/s²]')
-ylabel('a_y [m/s²]')
-zlabel('velocity [km/h]')
 
-%% Erstellt Daten für Face Plot
 
-vertices = [];
-faces = [];
-
-vertices = [ggv.Data_pos(1,:); ggv.Data_pos(2,:); ggv.Data_pos(7,:); ggv.Data_pos(8,:); ...
-    ggv.Data_pos(2,:); ggv.Data_pos(3,:); ggv.Data_pos(8,:); ggv.Data_pos(9,:)];
-
-faces = [1 2 4 3; 5 6 8 7];
-
-cdata = [ggv.Data_pos(1,3); ggv.Data_pos(2,3); ggv.Data_pos(7,3); ggv.Data_pos(8,3); ...
-    ggv.Data_pos(2,3); ggv.Data_pos(3,3); ggv.Data_pos(8,3); ggv.Data_pos(9,3)];
-
-patch('Faces', faces, 'Vertices', vertices,'FaceVertexCData',cdata, 'FaceColor','interp')
-grid
 
 
 

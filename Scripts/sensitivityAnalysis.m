@@ -3,8 +3,8 @@ LapTimeRow = [];
 
 %% Ein Parameter
 
-for n = 50:0.5:55
-    init.aeroBalance = n;
+for n = 45:1:55
+    init.cog_x = n;
     
     Initialisierung
     
@@ -15,7 +15,7 @@ end
 %% Plotten
 
 figure()
-plot(50:0.5:55, LapTime)
+plot(45:1:55, LapTime)
 grid
 % xlabel('Drag Height [m]')
 % ylabel('LapTime [s]')
