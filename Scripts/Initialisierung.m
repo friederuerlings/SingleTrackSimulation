@@ -3,7 +3,7 @@ clear apexData ggV interpVel resultData segmentData segments apexData
 %Gesamtfahrzeug
 init.m            = 165 + 70;  % in kg
 init.cog_z        = 0.267;     % in m
-% init.cog_x        = 51.7;      % in % von Vorne
+init.cog_x        = 51.7;      % in % von Vorne
 init.wheelbase    = 1.550;     % in m
 init.inertia_z    = 60;        %in kg*m²
 
